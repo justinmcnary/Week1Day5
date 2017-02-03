@@ -5,18 +5,41 @@
 //////////////////////////////////////////////////////////////////////
 
 // 1. create eventListener to capture submit of #shopping-list-entry
-//$('#js-shopping-list-form').submit(function(event) {
-//   event.preventDefault();
-//   addItem(state, $('#shopping-list-entry').val());
-//});
+$('#js-shopping-list-form').submit(function(event) {
+   event.preventDefault();
+    var input = $(event.currentTarget).find('input[name="shopping-list-entry"]').val();
+   addItem(state, input);
+});
+
+// 2. function to take `input` and put into the object `state`
+
+var state = {
+   items: [],
+};
+
+var addItem = function(state, item) {
+   state.items.push({
+        title: item,
+        done:false
+   });
+};
+
+var itemHTML = "<li> <span class="shopping-item">"+ item + "</span></li>"
 
 
 
 
+var renderList = function(state, element) {
+   var itemsHTML = state.items.map(function(item) {
+       console.log(itemsHTML);
+//       return '<li>' + item + '</li>';
+   });
+   element.html(itemsHTML);
+};
 
 
 
-// capture value of "#js-shopping-list-form > input" in a variable
+
 
 
 
@@ -41,7 +64,7 @@
 //var addItem = function(state, item) {
 //   state.items.push(item);
 //};
-//
+////
 //// Functions that render state
 //
 //var renderList = function(state, element) {
